@@ -1,10 +1,8 @@
-import Link from "next/link";
+import TodoForm from "@/components/todo-form";
+import { getTodos } from "@/data/todo";
+import React from "react";
 
-export default function Page() {
-  return (
-    <div>
-      <h1>Home</h1>
-      <Link href="/about">About</Link>
-    </div>
-  );
+export default async function HomePage() {
+  const todos = (await getTodos()) || [];
+  return <TodoForm todos={todos} />;
 }
