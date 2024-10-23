@@ -1,75 +1,78 @@
 "use client";
 
-import { useState } from "react";
-import { Check, Edit, Trash } from "lucide-react";
+import { startTransition, useActionState, useOptimistic } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Todo } from "@prisma/client";
+import { Todo } from "@/types";
+import { todosReducer } from "@/lib/todos-reducer";
+import List from "./list";
+import Item from "./item";
 
 type TodoFormProps = {
-    todos: Todo[] | [];
+  todosData: Todo[] | [];
 };
 
-export default function TodoForm({todos}: TodoFormProps) {
-  //const [todos, setTodos] = useState<Todo[]>([]);
-  const [newTodo, setNewTodo] = useState("");
-  const [editingId, setEditingId] = useState<number | null>(null);
-  const [editText, setEditText] = useState("");
+export default function TodoForm({ todosData }: TodoFormProps) {
+  const [todos, dispatch] = useActionState(todosReducer, todosData);
+  const [optimisticTodos, setOptimisticTodos] = useOptimistic(todos);
 
-  const addTodo = () => {
-    if (newTodo.trim()) {
-      setTodos([...todos, { id: Date.now(), text: newTodo, done: false }]);
-      setNewTodo("");
-    }
+  const handleAddTodo = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const title = formData.get("title")!.toString();
+    const id = Math.floor(Math.random() * 1000);
+    const todo: Todo = { id, title, completed: false };
+    startTransition(async () => {
+      setOptimisticTodos((prev) => [todo, ...prev]);
+      dispatch({
+        type: "ADD_TODO",
+        payload: { todo: { title, completed: false } },
+      });
+    });
+    form.reset();
   };
 
-  const deleteTodo = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-
-  const toggleDone = (id: number) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
-      )
-    );
-  };
-
-  const startEditing = (id: number, text: string) => {
-    setEditingId(id);
-    setEditText(text);
-  };
-
-  const saveEdit = () => {
-    if (editingId !== null) {
-      setTodos(
-        todos.map((todo) =>
-          todo.id === editingId ? { ...todo, text: editText } : todo
-        )
+  const handleDeleteTodo = async (todo: Todo) => {
+    startTransition(async () => {
+      setOptimisticTodos((prev) =>
+        prev.filter((todoState) => todoState.id !== todo.id)
       );
-      setEditingId(null);
-    }
+      dispatch({ type: "DELETE_TODO", payload: { todo } });
+    });
+  };
+
+  const handleUpdateTodo = async (todo: Todo) => {
+    startTransition(async () => {
+      setOptimisticTodos((prev) =>
+        prev.map((todoState) => (todoState.id === todo.id ? todo : todoState))
+      );
+      dispatch({ type: "UPDATE_TODO", payload: { todo } });
+    });
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4">Todo App</h1>
-      <div className="flex mb-4">
+      <form onSubmit={handleAddTodo} className="flex mb-4">
         <Input
+          name="title"
           type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add a new todo"
           className="flex-grow mr-2"
         />
-        <Button onClick={addTodo}>Add</Button>
-      </div>
-      <ul className="space-y-2">
-        {todos.map((todo) => (
-          
+        <Button type="submit">Add</Button>
+      </form>
+      <List>
+        {optimisticTodos.map((todo) => (
+          <Item
+            key={todo.id}
+            todo={todo}
+            onDelete={handleDeleteTodo}
+            onSaveEditing={handleUpdateTodo}
+          />
         ))}
-      </ul>
+      </List>
     </div>
   );
 }
