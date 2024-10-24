@@ -5,5 +5,9 @@ type ListProps = {
 };
 
 export default function List({ children }: ListProps) {
-  return <ul className="space-y-2">{children}</ul>;
+  return (
+    <ul className="space-y-2" data-testid="todo-list">
+      {children}
+    </ul>
+  );
 }

@@ -77,10 +77,16 @@ export default function Item({ todo, onDelete, onSaveEditing }: ItemProps) {
             variant="ghost"
             size="sm"
             className="mr-1"
+            data-testid="edit-button"
           >
             <Edit className="h-4 w-4" />
           </Button>
-          <Button onClick={handleDelete} variant="ghost" size="sm">
+          <Button
+            onClick={handleDelete}
+            variant="ghost"
+            size="sm"
+            data-testid="delete-button"
+          >
             <Trash className="h-4 w-4" />
           </Button>
         </>

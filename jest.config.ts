@@ -13,6 +13,7 @@ const config: Config = {
   testEnvironment: "node",
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  testMatch: ["**/tests/**/*.test.ts"],
   moduleNameMapper: {
     "/^@/(.*)$/": "C:Git\\testing-jest-app$1",
   },

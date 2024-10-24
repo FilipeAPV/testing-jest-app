@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "jest & next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
@@ -30,7 +30,7 @@
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@types/jest": "^29.5.14",
-    "@types/node": "^20.16.15",
+    "@types/node": "^20.17.0",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
@@ -40,6 +40,7 @@
     "jest-mock-extended": "^4.0.0-beta1",
     "postcss": "^8",
     "prisma": "^5.21.1",
+    "puppeteer": "^23.6.0",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"

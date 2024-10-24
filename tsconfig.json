@@ -27,6 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
+    "tests/**/*.ts",
     "jest.config.mjs"
   ],
   "exclude": ["node_modules"]
