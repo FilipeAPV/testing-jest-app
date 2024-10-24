@@ -1,6 +1,4 @@
-Testing
-
-(Bao, 2024)
+# Compare and contrast the different types and levels of testing
 
 ## Unit Testing
 
