@@ -21,6 +21,25 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Install Puppeteer Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 \
+            libxss1 \
+            libasound2 \
+            libatk1.0-0 \
+            libatk-bridge2.0-0 \
+            libcups2 \
+            libdrm2 \
+            libgbm1 \
+            libgtk-3-0 \
+            libxcomposite1 \
+            libxdamage1 \
+            libxrandr2 \
+            xdg-utils \
+            --no-install-recommends
+
       - name: Run Tests
         run: npm test
 
