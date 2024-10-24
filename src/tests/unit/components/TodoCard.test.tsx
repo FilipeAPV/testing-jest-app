@@ -54,6 +54,7 @@ jest.mock("../../../components/ui/card", () => ({
 
 // Mock the ClipboardList icon
 jest.mock("lucide-react", () => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ClipboardList: (props: any) => (
     <svg data-testid="clipboard-icon" {...props}></svg>
   ),
