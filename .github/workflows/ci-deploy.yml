@@ -40,8 +40,10 @@ jobs:
             xdg-utils \
             --no-install-recommends
 
-      - name: Run Tests
-        run: npm test
+      - name: Run Unit Tests - Functions
+        run: npm run test:unit:fn
+      - name: Run Unit Tests - Components
+        run: npm run test:jsdom:component
 
   deploy:
     needs: test
@@ -58,4 +60,4 @@ jobs:
       - name: Deploy to Vercel
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: vercel --prod --token $VERCEL_TOKEN --confirm
+        run: vercel --prod --token $VERCEL_TOKEN --yes
