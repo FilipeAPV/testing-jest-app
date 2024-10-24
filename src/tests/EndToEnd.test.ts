@@ -17,8 +17,9 @@ afterAll(async () => {
   await browser.close();
 });
 
-describe("Next.js Application E2E Test", () => {
+describe("Todo Application E2E Test", () => {
   const randomText = Math.random().toString(36).substring(7);
+
   it("should display the homepage with correct title", async () => {
     await page.goto(BASE_URL);
     await page.waitForSelector("h3");
@@ -28,8 +29,7 @@ describe("Next.js Application E2E Test", () => {
   });
 
   it("should add a new todo item and verify its presence in the list", async () => {
-    // Step 1: Select the input field and type "Task 1-TEST"
-
+    // Step 1: Select the input field
     const inputSelector = 'input[name="title"]';
     await page.waitForSelector(inputSelector);
     await page.click(inputSelector);
@@ -53,6 +53,43 @@ describe("Next.js Application E2E Test", () => {
       },
       {},
       todoListSelector,
+      randomText
+    );
+  }, 10000);
+
+  it("should delete the previously added todo item and verify its removal", async () => {
+    // Step 1: Locate the <li> element that contains the randomText
+    await page.waitForSelector("ul.space-y-2");
+    const todoItems = await page.$$("ul.space-y-2 li");
+    let itemFound = false;
+
+    for (const item of todoItems) {
+      const text = await item.$eval("span", (el) => el.textContent?.trim());
+      if (text === randomText) {
+        itemFound = true;
+        // Step 2: Click the delete button within this <li>
+        const deleteButton = await item.$(
+          'button[data-testid="delete-button"]'
+        );
+        if (deleteButton) {
+          await deleteButton.click();
+          break;
+        }
+      }
+    }
+
+    expect(itemFound).toBe(true);
+
+    // Step 4: Verify that the item has been removed from the list
+    await page.waitForFunction(
+      (selector, text) => {
+        const listItems = Array.from(
+          document.querySelectorAll(`${selector} li`)
+        );
+        return !listItems.some((li) => li.textContent?.includes(text));
+      },
+      {},
+      "ul.space-y-2",
       randomText
     );
   }, 10000);
