@@ -8,6 +8,7 @@ const createJestConfig = nextJest({
 const config: Config = {
   coverageProvider: "v8",
   testEnvironment: "node",
+  testMatch: ["<rootDir>/tests/unit/functions/**/*.test.ts"],
   moduleNameMapper: {
     "/^@/(.*)$/": "C:Git\\testing-jest-app$1",
   },

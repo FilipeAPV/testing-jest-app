@@ -12,8 +12,8 @@ jest.mock("../lib/db", () => ({
   },
 }));
 
-import { getTodos } from "../data/todo";
-import prisma from "../lib/db";
+import { getTodos } from "../../../data/todo";
+import prisma from "../../../lib/db";
 
 describe("getTodos", () => {
   afterEach(() => {
