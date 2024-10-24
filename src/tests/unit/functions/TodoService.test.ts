@@ -3,7 +3,7 @@
 // Ensures correct handling of both successful data retrieval and error scenarios.
 
 // Mock the default export of prisma client
-jest.mock("../lib/db", () => ({
+jest.mock("../../../lib/db", () => ({
   __esModule: true,
   default: {
     todo: {

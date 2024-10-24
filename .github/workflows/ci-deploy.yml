@@ -43,7 +43,7 @@ jobs:
       - name: Run Unit Tests - Functions
         run: npm run test:unit:fn
       - name: Run Unit Tests - Components
-        run: npm run test:jsdom:component
+        run: npm run test:unit:component
 
   deploy:
     needs: test

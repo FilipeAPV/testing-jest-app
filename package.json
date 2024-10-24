@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "test:unit:fn": "jest --config jest.unit.node.config.ts",
-    "test:jsdom:component": "jest --config jest.unit.jsdom.config.ts",
+    "test:unit:component": "jest --config jest.unit.jsdom.config.ts",
     "test:watch": "jest --watch",
     "seed": "node prisma/seed.ts"
   },
