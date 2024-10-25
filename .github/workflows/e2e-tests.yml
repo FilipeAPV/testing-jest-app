@@ -2,11 +2,10 @@ name: E2E Tests
 
 on:
   deployment_status:
-    types: [success]
 
 jobs:
   run-e2es:
-    if: github.event.deployment_status.state == 'success'
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

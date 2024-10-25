@@ -1,0 +1,17 @@
+name: Log Deployment Status Events
+
+on:
+  deployment_status:
+    types: [success, failure, pending, in_progress]
+
+jobs:
+  log-deployment-status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log Event Payload
+        run: |
+          echo "Deployment Status Event Received"
+          echo "State: ${{ github.event.deployment_status.state }}"
+          echo "Environment URL: ${{ github.event.deployment_status.environment_url }}"
+          echo "Deployment ID: ${{ github.event.deployment_status.deployment_id }}"
+          echo "Description: ${{ github.event.deployment_status.description }}"
