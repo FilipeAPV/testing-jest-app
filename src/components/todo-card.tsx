@@ -8,7 +8,7 @@ export default function TodoCard({ children }: { children: React.ReactNode }) {
       <CardHeader className="bg-gray-800 text-white rounded-t-lg">
         <CardTitle className="text-2xl font-semibold flex items-center justify-center">
           <ClipboardList className="mr-2 h-6 w-6" />
-          Task Manager1
+          Task Manager
         </CardTitle>
       </CardHeader>
       <CardContent className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
