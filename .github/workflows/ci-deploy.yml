@@ -44,6 +44,8 @@ jobs:
         run: npm run test:unit:fn
       - name: Run Unit Tests - Components
         run: npm run test:unit:component
+      - name: Run Integration Tests
+        run: npm run test:integration
 
   deploy:
     needs: test
