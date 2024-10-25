@@ -46,6 +46,8 @@ jobs:
         run: npm run test:unit:component
       - name: Run Integration Tests
         run: npm run test:integration
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
   deploy:
     needs: test
