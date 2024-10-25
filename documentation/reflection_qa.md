@@ -1,0 +1,11 @@
+# Evaluate the quality assurance processes that can be automated during software development to achieve and maintain project requirements.
+
+Automating **quality assurance (QA) processes (LO2.6.2.1)** optimizes software development by enhancing reliability, consistency, and speed, while minimizing the need for manual testing. QA tools like automated testing and static code analysis [ref notes] ensure that quality checks are consistent and reproducible, resulting in faster feedback loops. Although I work daily with such infrastructure as a software developer, setting up this workflow from scratch at an academic level was a new experience for me. To tackle this, I decided to establish a Continuous Integration/Continuous Development (CI/CD) infrastructure [ref notes], where tests, such as unit and integration tests, are automatically run whenever a developer pushes changes to a branch.
+
+This experience was engaging, as it broadened my understanding of designing and setting up an effective workflow. While there were moments of intense troubleshooting, I felt confident in my ability to succeed. This was a marked contrast to the lengthy, unsuccessful attempts I faced during my first year when trying to establish similar infrastructure.
+
+Setting up a fully functional pipeline gave me valuable insights into the DevOps side of software development. While testing concepts themselves are familiar, the methods of automating and executing them have evolved significantly. Emerging AI-driven tools aim to automate not only test execution but even test writing, signaling a potential shift in the field. Although widespread adoption in enterprise settings may take time, this Learning Outcome helped me understand the current practices, which is crucial for assessing the impact of these new solutions. Additionally, I noticed a significant improvement in documentation quality compared to three years ago, which contributed to my successful implementation.
+
+For the future, this experience equips me to better understand and collaborate with my DevOps colleagues, facilitating clearer communication and more effective teamwork. It also gave me the skills and confidence to set up similar infrastructure in my academic and personal projects, an indispensable asset as I continue to work on more complex software development tasks.
+
+#### References
